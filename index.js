@@ -37,9 +37,17 @@ app.post('/api/importactor', function(req,res) {
   console.log(student);
   client
   .query(
-    Create(
-      Collection('films'),
-      { data: { student } },
+    Map(
+      [
+        student
+      ],
+      Lambda(
+        'post_title',
+        Create(
+          Collection('films'),
+          { data: { title: Var('post_title') } },
+        )
+      ),
     )
   )
   res.send("Post done!")
