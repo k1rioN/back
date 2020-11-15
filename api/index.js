@@ -28,7 +28,13 @@ const {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-
+module.exports = (req, res) => {
+  res.json({
+    body: req.body,
+    query: req.query,
+    cookies: req.cookies,
+  })
+}
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
